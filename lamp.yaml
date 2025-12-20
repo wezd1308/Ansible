@@ -14,12 +14,12 @@
         name: apache2
         state: present
 
-    - name: Instalar el sistema gestor de bases de datos MariaDB
+    - name: Instalar MariaDB
       apt:
         name: mariadb-server
         state: present
 
-    - name: Instalar PHP y los módulos necesarios
+    - name: Instalar PHP
       apt:
         name:
           - php
