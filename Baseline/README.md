@@ -158,7 +158,7 @@ Si todo está correctamente configurado, el servidor quedará preparado automát
 ## ✍️ Autor
 
 **Walter Zambrano**
-Administrador de Sistemas / Infraestructura IT
+Sytem Administrator / Infraestructura IT
 
 ---
 
