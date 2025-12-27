@@ -140,10 +140,9 @@ Si todo está correctamente configurado, el servidor quedará preparado automát
 ## ⚠️ Consideraciones importantes
 
 * Cambiar la IP del servidor puede **interrumpir la sesión SSH**.
-
-  * Se recomienda ejecutar el playbook desde consola (VM, iLO, DRAC).
+ * Se recomienda ejecutar el playbook desde consola (VM, iLO, DRAC).
 * Probar siempre en entornos de laboratorio antes de producción.
-* Usar `serial: 1` si se ejecuta contra múltiples servidores.
+
 
 ---
 
