@@ -1,0 +1,81 @@
+---
+- name: Configurar red, hostname y zona horaria en Debian 13
+  hosts: all
+  become: yes
+
+  vars:
+    iface: eth0
+    ip_address: 192.168.91.167
+    netmask: 255.255.255.0
+    gateway: 192.168.91.2
+    dns_servers:
+      - 8.8.8.8
+      - 1.1.1.1
+    hostname: LABLDEBIAN01
+    timezone: America/Argentina/Buenos_Aires
+
+  tasks:
+    - name: Configurar /etc/network/interfaces
+      ansible.builtin.copy:
+        dest: /etc/network/interfaces
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          auto lo
+          iface lo ens33 loopback
+
+          auto {{ iface }}
+          iface {{ iface }} ens33 static
+            address {{ ip_address }}
+            netmask {{ netmask }}
+            gateway {{ gateway }}
+            dns-nameservers {{ dns_servers | join(' ') }}
+
+    - name: Reiniciar servicio de red
+      ansible.builtin.service:
+        name: networking
+        state: restarted
+
+    - name: Esperar 10 segundos para aplicar IP
+      ansible.builtin.pause:
+        seconds: 10
+
+    - name: Cambiar hostname
+      ansible.builtin.hostname:
+        name: "{{ hostname }}"
+
+    - name: Configurar zona horaria
+      ansible.builtin.timezone:
+        name: "{{ timezone }}"
+
+- name: Crear usuario de aplicación
+  hosts: all
+  become: yes
+  tasks:
+    - name: Crear usuario simple
+      ansible.builtin.user:
+        name: wezd
+
+- name: Instalar paquetes base en servidores Debian
+  hosts: all
+  become: yes
+  tasks:
+    - name: Actualizar lista de paquetes
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Instalar herramientas básicas
+      ansible.builtin.apt:
+        name:
+          - net-tools
+          - htop
+          - curl
+          - git
+          - unzip
+          - vim
+          - rsync
+          - fail2ban
+          - ufw
+          - emacs
+        state: present
