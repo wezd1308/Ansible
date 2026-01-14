@@ -1,0 +1,70 @@
+---
+- name: Instalar paquetes con Chocolatey
+  hosts: servidores_windows
+  gather_facts: no
+
+  tasks:
+
+    - name: Instalar Chocolatey
+      win_command: powershell.exe -
+      args:
+       stdin: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+
+    - name: Asegurar que Chocolatey esté instalado
+      win_chocolatey:
+       name: Chocolatey
+       state: present
+
+
+    - name: Instalar Sysinternals
+      win_chocolatey:
+       name: sysinternals
+       pinned: yes
+       state: present
+
+
+    - name: Instalar 7zip
+      win_chocolatey:
+       name: 7zip
+       pinned: yes
+       state: present
+
+
+    - name: Instalar Notepad++
+      win_chocolatey:
+       name: notepadplusplus.install
+       pinned: yes
+       state: present
+
+
+    - name: Instalar Postman
+      win_chocolatey:
+       name: postman
+       pinned: yes
+       state: present
+
+    - name: Instalar TeeSize
+      win_chocolatey:
+       name: treesize
+       pinned: yes
+       state: present
+  
+    - name: Instalar Winscp
+      win_chocolatey:
+       name: winscp
+       pinned: yes
+       state: present
+
+    - name: Instalar Poweshell 7
+      win_command: powershell.exe -
+      args:
+        stdin: iex "& { $(irm https://aka.ms/install-powershell.ps1) } -Quiet"
+
+    - name: Instalar SQL management-studio
+      win_chocolatey: 
+        name: sql-server-management-studio
+        pinned: yes
+        state: present 
+      
