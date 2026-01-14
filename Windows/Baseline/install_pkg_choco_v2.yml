@@ -62,9 +62,5 @@
       args:
         stdin: iex "& { $(irm https://aka.ms/install-powershell.ps1) } -Quiet"
 
-    - name: Instalar SQL management-studio
-      win_chocolatey: 
-        name: sql-server-management-studio
-        pinned: yes
-        state: present 
+
       
