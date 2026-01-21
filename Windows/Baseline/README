@@ -1,5 +1,0 @@
-🧪 Home Lab – Automatización de Windows Server con Ansible y Chocolatey
-📌 Descripción
-
-Este proyecto forma parte de un Home Lab diseñado para practicar y demostrar la automatización de servidores Windows Server utilizando Ansible y Chocolatey como gestor de paquetes.
-El laboratorio simula un entorno real de infraestructura IT, donde un Ansible Controller (Linux) administra servidores Windows mediante WinRM, permitiendo instalar aplicaciones de forma automática, repetible y estandarizada.
